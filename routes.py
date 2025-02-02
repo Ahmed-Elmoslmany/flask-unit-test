@@ -1,40 +1,30 @@
-from flask import jsonify, request
-from app import app
-from models.post import Post
-from controllers import post_controller
+import app
+import controllers.posts as posts
 
 @app.route('/posts')
 def get_posts():
-    response = post_controller.get_posts()
-    return response
+    return posts.get_posts()
 
 @app.route('/posts', methods=['POST'])
 def add_post():
-    response = post_controller.create_post()
-    return response
+    return posts.create_post()
 
 @app.route('/posts/<int:id>')
 def get_post(id):
-    response = post_controller.get_post(id)
-    return response
+    return posts.get_post(id)
 
 @app.route('/posts/<int:id>', methods=['PATCH'])
 def edit_post(id):
-    response = post_controller.edit_post(id)
-    return response
+    return posts.edit_post(id)
 
 @app.route('/posts/<int:id>', methods=['DELETE'])
 def delete_post(id):
-    response = post_controller.delete_post(id)
-    return response
+    return posts.delete_post(id)
 
-# Add comment to post
 @app.route('/posts/<int:id>/comments', methods=['POST'])
 def attach_comment_to_post(id):
-    response = post_controller.attach_comment_to_post(id)
-    return response
+    return posts.attach_comment_to_post(id)
 
 @app.route('/posts/<int:id>/tags', methods=['POST'])
 def attach_tag_to_post(id):
-    response = post_controller.attach_tag_to_post(id)
-    return response
+    return posts.attach_tag_to_post(id)
